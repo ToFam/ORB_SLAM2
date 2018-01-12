@@ -489,4 +489,14 @@ vector<cv::KeyPoint> System::GetTrackedKeyPointsUn()
     return mTrackedKeyPointsUn;
 }
 
+Map* System::GetMap() const
+{
+    return mpMap;
+}
+
+void System::ChangeCalibration(float bf, float fx, float fy, float cx, float cy, float k1, float k2, float p1, float p2, float k3)
+{
+    mpTracker->ChangeCalibration(bf, fx, fy, cx, cy, k1, k2, p1, p2, k3);
+}
+
 } //namespace ORB_SLAM

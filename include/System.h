@@ -22,6 +22,7 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+#include <unistd.h>
 #include<string>
 #include<thread>
 #include<opencv2/core/core.hpp>
@@ -121,6 +122,9 @@ public:
     int GetTrackingState();
     std::vector<MapPoint*> GetTrackedMapPoints();
     std::vector<cv::KeyPoint> GetTrackedKeyPointsUn();
+
+    Map* GetMap() const;
+    void ChangeCalibration(float bf, float fx, float fy, float cx, float cy, float k1, float k2, float p1, float p2, float k3 = 0.f);
 
 private:
 

@@ -1557,6 +1557,19 @@ void Tracking::ChangeCalibration(const string &strSettingPath)
     float cx = fSettings["Camera.cx"];
     float cy = fSettings["Camera.cy"];
 
+    float k1 = fSettings["Camera.k1"];
+    float k2 = fSettings["Camera.k2"];
+    float k3 = fSettings["Camera.k3"];
+    float p1 = fSettings["Camera.p1"];
+    float p2 = fSettings["Camera.p2"];
+
+    float bf = fSettings["Camera.bf"];
+
+    ChangeCalibration(bf, fx, fy, cx, cy, k1, k2, p1, p2, k3);
+}
+
+void Tracking::ChangeCalibration(float bf, float fx, float fy, float cx, float cy, float k1, float k2, float p1, float p2, float k3)
+{
     cv::Mat K = cv::Mat::eye(3,3,CV_32F);
     K.at<float>(0,0) = fx;
     K.at<float>(1,1) = fy;
@@ -1565,11 +1578,10 @@ void Tracking::ChangeCalibration(const string &strSettingPath)
     K.copyTo(mK);
 
     cv::Mat DistCoef(4,1,CV_32F);
-    DistCoef.at<float>(0) = fSettings["Camera.k1"];
-    DistCoef.at<float>(1) = fSettings["Camera.k2"];
-    DistCoef.at<float>(2) = fSettings["Camera.p1"];
-    DistCoef.at<float>(3) = fSettings["Camera.p2"];
-    const float k3 = fSettings["Camera.k3"];
+    DistCoef.at<float>(0) = k1;
+    DistCoef.at<float>(1) = k2;
+    DistCoef.at<float>(2) = p1;
+    DistCoef.at<float>(3) = p2;
     if(k3!=0)
     {
         DistCoef.resize(5);
@@ -1577,7 +1589,7 @@ void Tracking::ChangeCalibration(const string &strSettingPath)
     }
     DistCoef.copyTo(mDistCoef);
 
-    mbf = fSettings["Camera.bf"];
+    mbf = bf;
 
     Frame::mbInitialComputations = true;
 }

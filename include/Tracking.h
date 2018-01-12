@@ -71,6 +71,8 @@ public:
     // TODO: Modify MapPoint::PredictScale to take into account focal lenght
     void ChangeCalibration(const string &strSettingPath);
 
+    void ChangeCalibration(float bf, float fx, float fy, float cx, float cy, float k1, float k2, float p1, float p2, float k3 = 0.f);
+
     // Use this function if you have deactivated local mapping and you only want to localize the camera.
     void InformOnlyTracking(const bool &flag);
 
