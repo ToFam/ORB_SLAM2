@@ -499,4 +499,9 @@ void System::ChangeCalibration(float bf, float fx, float fy, float cx, float cy,
     mpTracker->ChangeCalibration(bf, fx, fy, cx, cy, k1, k2, p1, p2, k3);
 }
 
+void System::ForceRelocalization()
+{
+    mpTracker->InformRelocalization();
+}
+
 } //namespace ORB_SLAM

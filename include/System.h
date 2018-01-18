@@ -125,6 +125,7 @@ public:
 
     Map* GetMap() const;
     void ChangeCalibration(float bf, float fx, float fy, float cx, float cy, float k1, float k2, float p1, float p2, float k3 = 0.f);
+    void ForceRelocalization();
 
 private:
 
